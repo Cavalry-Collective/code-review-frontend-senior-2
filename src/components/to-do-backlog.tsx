@@ -1,13 +1,10 @@
 import React from 'react';
 import { PlusOutlined } from '@ant-design/icons';
 import { Empty } from 'antd';
+import { DataNode } from 'rc-tree/lib/interface';
+import TreeList from './common/tree-list';
 
-export interface IToDoInfo{
-  name: string
-  docs?:string
-}
-
-const ToDoBacklog :React.FC<{backlogTodoList: IToDoInfo[]}> = ({ backlogTodoList }) => (
+const ToDoBacklog: React.FC<{ backlogTodoList: DataNode[] }> = ({ backlogTodoList }) => (
   <div>
     <h2>
       <span className="todo-title">
@@ -15,7 +12,11 @@ const ToDoBacklog :React.FC<{backlogTodoList: IToDoInfo[]}> = ({ backlogTodoList
       </span>
       <PlusOutlined />
     </h2>
-    {backlogTodoList.length ? <div>tree</div> : <Empty description={false} />}
+    {
+      backlogTodoList.length
+        ? <TreeList treeData={backlogTodoList} />
+        : <Empty description={false} />
+    }
   </div>
 );
 
