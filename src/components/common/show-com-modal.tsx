@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { nanoid } from 'nanoid';
 import moment from 'moment';
 import {
-  Button, DatePicker, Input, Modal, Space,
+  DatePicker, Input, message, Modal,
 } from 'antd';
 import { ITreeData } from '../componnts';
 
@@ -21,7 +21,6 @@ const ShowComModal:React.FC<IProps> = ({ onOk, nodeData = {}, children }) => {
    * 数据格式化（清空）
    */
   const dataFormat = () => {
-    console.log('----date', nodeData.date);
     setTitle(nodeData.title || '');
     setDate(nodeData.date ? moment(nodeData.date) : null);
   };
@@ -31,27 +30,33 @@ const ShowComModal:React.FC<IProps> = ({ onOk, nodeData = {}, children }) => {
   }, [isModalVisible]);
 
   const handleOk = () => {
+    if (!title) {
+      message.warning('请输入任务名');
+      return;
+    }
+
     const childrenNode: ITreeData = {
       key: nanoid(),
       ...nodeData,
       title,
+      date: date ? moment(date).format() : null,
     };
-    date && (childrenNode.date = moment(date).format());
     setIsModalVisible(false);
     onOk(childrenNode);
   };
 
-  return (
-    <Space>
+  const handleClick = (visible: boolean) => () => setIsModalVisible(visible);
 
-      <Button type="link" onClick={() => setIsModalVisible(true)}>
+  return (
+    <>
+      <span onClick={() => setIsModalVisible(true)}>
         {children}
-      </Button>
+      </span>
       <Modal
         title="Basic Modal"
         visible={isModalVisible}
         onOk={handleOk}
-        onCancel={() => setIsModalVisible(false)}
+        onCancel={handleClick(false)}
       >
         <Input
           placeholder="任务名"
@@ -65,8 +70,8 @@ const ShowComModal:React.FC<IProps> = ({ onOk, nodeData = {}, children }) => {
           value={date}
         />
       </Modal>
-    </Space>
 
+    </>
   );
 };
 

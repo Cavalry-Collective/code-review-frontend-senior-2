@@ -2,8 +2,9 @@ import React, { useContext } from 'react';
 import { FormOutlined, PlusOutlined } from '@ant-design/icons';
 
 import {
-  Button, Col, Row, Space,
+  Button, Space,
 } from 'antd';
+import moment from 'moment';
 import { ITreeData } from '../componnts';
 import { AppContext } from '../../App';
 import ShowComModal from './show-com-modal';
@@ -31,26 +32,32 @@ const TreeTitle: React.FC<{ nodeData: ITreeData }> = ({ nodeData }) => {
   };
 
   return (
-    <div>
-      <Space>
-        <span>
-          {nodeData.title}
-        </span>
+    <div className="item-wrap">
+      <div className="title-wrap">
+        <Space>
+          <span>
+            {nodeData.title}
+          </span>
+          <ShowComModal onOk={editNodeDate} nodeData={nodeData}>
+            <FormOutlined />
+          </ShowComModal>
+          <ShowComModal onOk={addChildren}>
+            <PlusOutlined />
+          </ShowComModal>
+        </Space>
 
-        <ShowComModal onOk={editNodeDate} nodeData={nodeData}>
-          <FormOutlined />
-        </ShowComModal>
-        <ShowComModal onOk={addChildren}>
-          <PlusOutlined />
-        </ShowComModal>
-
-        <Button type="primary" danger size="small">
-          Primary
+      </div>
+      {nodeData.date && (
+      <div className="date-wrap">
+        { moment(nodeData.date).isBefore(moment()) && (
+        <Button type="primary" danger size="small" style={{ marginRight: '10px' }}>
+          Overdue
         </Button>
+        )}
+        { `Due ${moment(nodeData.date).format('YYYY-MM-DD')}` }
+      </div>
+      )}
 
-        {nodeData.date}
-
-      </Space>
     </div>
   );
 };

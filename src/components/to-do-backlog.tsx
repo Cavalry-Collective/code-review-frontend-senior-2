@@ -1,7 +1,6 @@
 import React, { useContext } from 'react';
 import { PlusOutlined } from '@ant-design/icons';
 import { Empty } from 'antd';
-import { nanoid } from 'nanoid';
 import TreeList from './common/tree-list';
 import { ITreeData } from './componnts';
 import { AppContext } from '../App';
@@ -28,9 +27,9 @@ const ToDoBacklog: React.FC<{ backlogTodoList: ITreeData[] }> = ({ backlogTodoLi
           <PlusOutlined />
         </ShowComModal>
       </h2>
+
       {
-        backlogTodoList.length
-          ? <TreeList treeData={backlogTodoList} />
+        backlogTodoList.length ? <TreeList treeData={backlogTodoList} />
           : <Empty description={false} />
       }
     </div>

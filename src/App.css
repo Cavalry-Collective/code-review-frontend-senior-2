@@ -7,3 +7,10 @@
 .todo-title{
     margin: 50px 20px;
 }
+
+.item-wrap{
+    min-width: 600px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
