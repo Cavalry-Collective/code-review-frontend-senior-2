@@ -29,5 +29,8 @@ module.exports = {
     'no-unused-vars': 0,
     'import/no-extraneous-dependencies': 0,
     'no-console': 0,
+    'linebreak-style': 0,
+    'no-param-reassign': 0,
+    'no-unused-expressions': 0,
   },
 };
