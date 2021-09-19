@@ -35,11 +35,11 @@ const TreeTitle: React.FC<{ nodeData: ITreeData }> = ({ nodeData }) => {
     <div className="item-wrap">
       <div className="title-wrap">
         <Space>
-          <span>
+          <span data-testid="task-title">
             {nodeData.title}
           </span>
           <ShowComModal onOk={editNodeDate} nodeData={nodeData}>
-            <FormOutlined />
+            <FormOutlined data-testid="edit-button" />
           </ShowComModal>
           <ShowComModal onOk={addChildren}>
             <PlusOutlined />
@@ -50,11 +50,13 @@ const TreeTitle: React.FC<{ nodeData: ITreeData }> = ({ nodeData }) => {
       {nodeData.date && (
       <div className="date-wrap">
         { moment(nodeData.date).isBefore(moment()) && (
-        <Button type="primary" danger size="small" style={{ marginRight: '10px' }}>
+        <Button type="primary" danger size="small" style={{ marginRight: '10px' }} data-testid="date-overdue">
           Overdue
         </Button>
         )}
-        { `Due ${moment(nodeData.date).format('YYYY-MM-DD')}` }
+        <span data-testid="task-date">
+          { `Due ${moment(nodeData.date).format('YYYY-MM-DD')}` }
+        </span>
       </div>
       )}
 

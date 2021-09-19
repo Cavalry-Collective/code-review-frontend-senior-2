@@ -24,7 +24,7 @@ const ToDoBacklog: React.FC<{ backlogTodoList: ITreeData[] }> = ({ backlogTodoLi
           To Do
         </span>
         <ShowComModal onOk={addNode}>
-          <PlusOutlined />
+          <PlusOutlined data-testid="add-button" />
         </ShowComModal>
       </h2>
 

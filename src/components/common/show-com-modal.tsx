@@ -53,17 +53,19 @@ const ShowComModal:React.FC<IProps> = ({ onOk, nodeData = {}, children }) => {
         {children}
       </span>
       <Modal
-        title="Basic Modal"
+        title="提示"
         visible={isModalVisible}
         onOk={handleOk}
         onCancel={handleClick(false)}
       >
         <Input
+          data-testid="input-task-title"
           placeholder="任务名"
           value={title}
           onChange={(e) => setTitle(e.target.value)}
         />
         <DatePicker
+          data-testid="input-task-date"
           placeholder="截止日期"
           style={{ width: '100%', marginTop: '10px' }}
           onChange={setDate}
