@@ -32,6 +32,7 @@ function App() {
       if (checkedList.includes(i.key)) doneList.push(i);
       else undoneList.push(i);
     });
+    !undoneList.length && localStorage.removeItem('checkedKeysValue-undone');
     setBacklogTreeData(undoneList);
     setCompletedTreeData(doneList);
   };

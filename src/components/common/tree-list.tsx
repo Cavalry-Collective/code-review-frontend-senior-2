@@ -23,9 +23,6 @@ const TreeList:React.FC<{treeData: ITreeData[]}> = ({ treeData }) => {
     const setKey = JSON.parse(localKeys).filter((i:string) => allKeys.includes(i));
     localStorage.setItem('checkedKeysValue-undone', JSON.stringify(setKey));
     setCheckedKeys(setKey);
-    return () => {
-      localStorage.removeItem('checkedKeysValue-undone');
-    };
   }, [treeData]);
 
   const onCheck = (checkedKeysValue: any) => {
